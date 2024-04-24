@@ -19,7 +19,7 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    //formState: { errors },
   } = useForm<LoginFormInput>();
   const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
     console.log(data);
