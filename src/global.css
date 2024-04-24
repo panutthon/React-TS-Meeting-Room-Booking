@@ -1,0 +1,19 @@
+:root {
+    --primary-color: #F8D247;
+    --secondary-color: #F8D247;
+    --third-color: #FFFBEB;
+    --hoverMain-color: #F5F7FE;
+    --border01-color: #D8DDE7;
+    --textBody-color: #1B2132;
+    --success-color: #1EAA79;
+    --error-color: #E53E3E;
+    --white-color: #fff;
+    --footer-color: #141516;
+}
+
+.mytitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--textBody-color);
+    margin-bottom: 1rem;
+}

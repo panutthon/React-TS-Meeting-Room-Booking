@@ -1,14 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ChakraProvider } from "@chakra-ui/react";
+import { RouterProvider } from "react-router-dom";
 
 import "./global.css";
-import HomePage from "./pages/home-page.tsx";
+
+import router from "./routes/root.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ChakraProvider>
-      <HomePage />
+      <RouterProvider router={router} />
     </ChakraProvider>
   </React.StrictMode>
 );

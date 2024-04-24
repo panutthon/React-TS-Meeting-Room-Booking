@@ -8,8 +8,14 @@ import {
     Icon,
     IconProps,
   } from '@chakra-ui/react';
+
+  import homepagestyle from '../styles/homepage.module.css';
+  import { useNavigate } from 'react-router-dom';
   
   export default function HomePage() {
+    const navigateabout = useNavigate();
+    const navigatelogin = useNavigate();
+    
     return (
       <Container maxW={'5xl'}>
         <Stack
@@ -17,6 +23,8 @@ import {
           align={'center'}
           spacing={{ base: 8, md: 10 }}
           py={{ base: 20, md: 28 }}>
+            <p className='mytitle'>Test Global</p>
+            <p className={homepagestyle.title}>Test Module</p>
           <Heading
             fontWeight={600}
             fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}
@@ -26,21 +34,20 @@ import {
               made Aom
             </Text>
           </Heading>
-          <Text color={'gray.500'} maxW={'3xl'}>
-            Never miss a meeting. Never be late for one too. Keep track of your
-            meetings and receive smart reminders in appropriate times. Read your
-            smart “Daily Agenda” every morning.
-          </Text>
           <Stack spacing={6} direction={'row'}>
             <Button
               rounded={'full'}
               px={6}
               colorScheme={'orange'}
               bg={'orange.400'}
-              _hover={{ bg: 'orange.500' }}>
-              Get started
+              _hover={{ bg: 'orange.500' }} onClick={() => {
+                navigatelogin("/login")
+              }}>
+              Login
             </Button>
-            <Button rounded={'full'} px={6}>
+            <Button rounded={'full'} px={6} onClick={() => {
+              navigateabout("/about")
+            }}>
               Learn more
             </Button>
           </Stack>
