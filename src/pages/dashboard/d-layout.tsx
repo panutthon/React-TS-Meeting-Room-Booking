@@ -22,29 +22,26 @@ import {
   MenuItem,
   MenuList,
 } from '@chakra-ui/react';
+
+
 import {
   FiHome,
-  FiTrendingUp,
-  FiCompass,
   FiStar,
-  FiSettings,
   FiMenu,
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  href: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Explore', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
+  { name: 'Home', icon: FiHome, href: '/dashboard'},
+  { name: 'Room', icon: FiStar, href: '/dashboard/room'},
 ];
 
 export default function DLayout() {
@@ -81,6 +78,7 @@ interface SidebarProps extends BoxProps {
 }
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const location = useLocation();
   return (
     <Box
       transition="3s ease"
@@ -93,12 +91,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
+          Meeting
         </Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+        <NavItem key={link.name} icon={link.icon} href={link.href} active={location.pathname === link.href ? 'menuActive': ''}>
           {link.name}
         </NavItem>
       ))}
@@ -109,11 +107,14 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: ReactNode;
+  href : string;
+  active?: string;
 }
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ icon, children, href, active, ...rest }: NavItemProps) => {
   return (
-    <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <Link as={NavLink} to={href} style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
       <Flex
+        className={active}
         align="center"
         p="4"
         mx="4"
@@ -189,7 +190,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                 <Avatar
                   size={'sm'}
                   src={
-                    'https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
+                    'https://upload.wikimedia.org/wikipedia/en/5/53/Shiba_Inu_coin_logo.png'
                   }
                 />
                 <VStack
@@ -197,7 +198,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">Panutthon Chanacnon</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>

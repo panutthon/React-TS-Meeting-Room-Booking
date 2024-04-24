@@ -17,3 +17,7 @@
     color: var(--textBody-color);
     margin-bottom: 1rem;
 }
+
+.menuActive {
+    background-color: var(--primary-color);
+}
