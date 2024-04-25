@@ -17,8 +17,12 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { LoginFormInput } from "../app-types/login-form-input.type";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useToast } from '@chakra-ui/react'
 
 export default function LoginPage() {
+
+  // toast
+  const toast = useToast();
 
   // schema validation
   const schema = yup.object().shape({
@@ -28,13 +32,23 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm<LoginFormInput>({
     resolver: yupResolver(schema),
+    mode : 'onSubmit'
   });
   const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
     console.log(data);
+    toast({
+      title: "เข้าสู่ระบบสำเร็จ",
+      // description: JSON.stringify(data),
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+      position: "top-right"
+    });
   };
+
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -91,6 +105,8 @@ export default function LoginPage() {
                   <Link color={"blue.400"}>Forgot password?</Link>
                 </Stack>
                 <Button
+                  isLoading={isSubmitting}
+                  loadingText="กำลังเข้าสู่ระบบ..."
                   type="submit"
                   bg={"blue.400"}
                   color={"white"}
