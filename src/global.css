@@ -18,6 +18,13 @@
     margin-bottom: 1rem;
 }
 
+.mytitle1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--success-color);
+    margin-bottom: 1rem;
+}
+
 .menuActive {
     background-color: var(--primary-color);
 }

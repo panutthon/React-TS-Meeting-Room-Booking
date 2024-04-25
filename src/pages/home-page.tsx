@@ -12,9 +12,15 @@ import {
   import homepagestyle from '../styles/homepage.module.css';
   import { useNavigate } from 'react-router-dom';
   
+  import { useAppSelector } from '../redux-toolkit/hooks';
+  import { selectAuthState } from '../redux-toolkit/auth/auth-slice';
+  
   export default function HomePage() {
     const navigateabout = useNavigate();
     const navigatelogin = useNavigate();
+
+    const authState = useAppSelector(selectAuthState)
+    const {profile, email} = useAppSelector(selectAuthState)
     
     return (
       <Container maxW={'5xl'}>
@@ -23,8 +29,8 @@ import {
           align={'center'}
           spacing={{ base: 8, md: 10 }}
           py={{ base: 20, md: 28 }}>
-            <p className='mytitle'>Test Global</p>
-            <p className={homepagestyle.title}>Test Module</p>
+            <p className='mytitle'> Welcome {authState.profile} {authState.email}</p>
+            <p className={homepagestyle.title}>Test Module {profile} {email} </p>
           <Heading
             fontWeight={600}
             fontSize={{ base: '3xl', sm: '4xl', md: '6xl' }}

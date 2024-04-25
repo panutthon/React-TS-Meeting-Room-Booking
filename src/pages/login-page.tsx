@@ -41,7 +41,7 @@ export default function LoginPage() {
     console.log(data);
     toast({
       title: "เข้าสู่ระบบสำเร็จ",
-      // description: JSON.stringify(data),
+      description: JSON.stringify(data),
       status: "success",
       duration: 3000,
       isClosable: true,
