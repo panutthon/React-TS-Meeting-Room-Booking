@@ -11,16 +11,27 @@ import {
   Heading,
   Text,
   useColorModeValue,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { LoginFormInput } from "../app-types/login-form-input.type";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 export default function LoginPage() {
+
+  // schema validation
+  const schema = yup.object().shape({
+    email: yup.string().required('ป้อนข้อมูลอีเมลล์ด้วย').email('รูปแบบอีเมลล์ไม่ถูกต้อง'),
+    password: yup.string().required('ป้อนข้อมูลรหัสผ่านด้วย').min(6, 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร'),
+  });
   const {
     register,
     handleSubmit,
-    //formState: { errors },
-  } = useForm<LoginFormInput>();
+    formState: { errors },
+  } = useForm<LoginFormInput>({
+    resolver: yupResolver(schema),
+  });
   const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
     console.log(data);
   };
@@ -55,13 +66,20 @@ export default function LoginPage() {
             p={8}
           >
             <Stack spacing={4}>
-              <FormControl id="email">
+              <FormControl id="email" isInvalid={errors.email ? true : false}>
                 <FormLabel>Email address</FormLabel>
                 <Input type="email" {...register("email")} />
+                <FormErrorMessage>
+                  {errors.email && errors.email.message}
+                </FormErrorMessage>
               </FormControl>
-              <FormControl id="password">
+
+              <FormControl id="password" isInvalid={errors.password ? true : false}>
                 <FormLabel>Password</FormLabel>
                 <Input type="password" {...register("password")} />
+                <FormErrorMessage>
+                  {errors.password && errors.password.message}
+                </FormErrorMessage>
               </FormControl>
               <Stack spacing={10}>
                 <Stack
