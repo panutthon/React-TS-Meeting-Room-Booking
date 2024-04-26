@@ -13,21 +13,30 @@ import {
   useColorModeValue,
   FormErrorMessage,
 } from "@chakra-ui/react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { LoginFormInput } from "../app-types/login-form-input.type";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useToast } from '@chakra-ui/react'
+import { useToast } from "@chakra-ui/react";
+import { useAppDispatch } from "../redux-toolkit/hooks";
+import { loginThunk } from "../redux-toolkit/auth/auth-slice";
+import { LoginErrorResponse } from "../app-types/login.type";
 
 export default function LoginPage() {
-
   // toast
   const toast = useToast();
+  const dispatch = useAppDispatch();
 
   // schema validation
   const schema = yup.object().shape({
-    email: yup.string().required('ป้อนข้อมูลอีเมลล์ด้วย').email('รูปแบบอีเมลล์ไม่ถูกต้อง'),
-    password: yup.string().required('ป้อนข้อมูลรหัสผ่านด้วย').min(6, 'รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร'),
+    email: yup
+      .string()
+      .required("ป้อนข้อมูลอีเมลล์ด้วย")
+      .email("รูปแบบอีเมลล์ไม่ถูกต้อง"),
+    password: yup
+      .string()
+      .required("ป้อนข้อมูลรหัสผ่านด้วย")
+      .min(6, "รหัสผ่านต้องมีอย่างน้อย 6 ตัวอักษร"),
   });
   const {
     register,
@@ -35,20 +44,26 @@ export default function LoginPage() {
     formState: { errors, isSubmitting },
   } = useForm<LoginFormInput>({
     resolver: yupResolver(schema),
-    mode : 'onSubmit'
+    mode: "onSubmit",
   });
-  const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
-    console.log(data);
-    toast({
-      title: "เข้าสู่ระบบสำเร็จ",
-      description: JSON.stringify(data),
-      status: "success",
-      duration: 3000,
-      isClosable: true,
-      position: "top-right"
-    });
-  };
 
+  const onSubmit = async (data: LoginFormInput) => {
+
+    try {
+      const result = await dispatch(loginThunk(data)).unwrap(); // global state
+      console.log(result.access_token);
+    } catch (error: any) {
+      let err: LoginErrorResponse = error;
+      toast({
+        title: "เข้าสู่ระบบไม่สำเร็จ",
+        description: err.message,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -88,7 +103,10 @@ export default function LoginPage() {
                 </FormErrorMessage>
               </FormControl>
 
-              <FormControl id="password" isInvalid={errors.password ? true : false}>
+              <FormControl
+                id="password"
+                isInvalid={errors.password ? true : false}
+              >
                 <FormLabel>Password</FormLabel>
                 <Input type="password" {...register("password")} />
                 <FormErrorMessage>
