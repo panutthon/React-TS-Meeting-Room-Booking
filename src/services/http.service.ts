@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 const http = axios.create({
     headers: {
@@ -7,4 +7,6 @@ const http = axios.create({
 });
 
 export {http};
+
+export type { AxiosResponse };
 
