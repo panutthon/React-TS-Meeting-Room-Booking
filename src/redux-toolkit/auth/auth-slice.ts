@@ -8,8 +8,8 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-  profile : 'John Doe',
-  email : 'aom@gmail.com',
+  profile : 'John Doe Example',
+  email : 'aom@gmail.com Example',
 }
 
 export const authSlice = createSlice({
@@ -17,8 +17,8 @@ export const authSlice = createSlice({
   initialState : initialState,
   reducers: {
     updateProfileAction: (state) => {
-      state.profile = 'Ploy Eiei';
-      state.email = 'ploy@gmail.com'
+      state.profile = 'Ploy Eiei Example';
+      state.email = 'ploy@gmail.com Example'
     }
   },
 })
