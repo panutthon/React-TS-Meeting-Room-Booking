@@ -14,4 +14,6 @@ export function logout(): void{
     localStorage.removeItem('token');
 }
 
-export function getProfile() {}
+export async function getProfile() {
+    
+}
