@@ -32,7 +32,8 @@ import {
   FiChevronDown,
 } from 'react-icons/fi';
 import { IconType } from 'react-icons';
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { logout } from '../../services/auth.service';
 
 interface LinkItemProps {
   name: string;
@@ -145,7 +146,10 @@ const NavItem = ({ icon, children, href, active, ...rest }: NavItemProps) => {
 interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
+
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const navigate = useNavigate();
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -215,7 +219,13 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
               <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem>
               <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem
+              onClick={() => {
+                logout();
+                navigate('/');
+              }}
+              
+              >Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>

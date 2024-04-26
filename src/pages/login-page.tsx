@@ -21,11 +21,13 @@ import { useToast } from "@chakra-ui/react";
 import { useAppDispatch } from "../redux-toolkit/hooks";
 import { loginThunk } from "../redux-toolkit/auth/auth-slice";
 import { LoginErrorResponse } from "../app-types/login.type";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   // toast
   const toast = useToast();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   // schema validation
   const schema = yup.object().shape({
@@ -48,10 +50,20 @@ export default function LoginPage() {
   });
 
   const onSubmit = async (data: LoginFormInput) => {
-
     try {
       const result = await dispatch(loginThunk(data)).unwrap(); // global state
-      console.log(result.access_token);
+      // console.log(result.access_token);
+      if (result.access_token) {
+        localStorage.setItem("token", JSON.stringify(result.access_token));
+        navigate("/dashboard");
+      }
+      toast({
+        title: "เข้าสู่ระบบสำเร็จ",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+        position: "top-right",
+      });
     } catch (error: any) {
       let err: LoginErrorResponse = error;
       toast({

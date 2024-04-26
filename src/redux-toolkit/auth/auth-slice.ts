@@ -28,7 +28,8 @@ export const loginThunk = createAsyncThunk<
   async (user: LoginFormInput, { rejectWithValue }) => {
     try {
       const response = await login(user.email, user.password);
-      console.log(response.data);
+      // console.log(response.data);
+      localStorage.setItem('token', JSON.stringify(response.data));
       return response.data;
     } catch (error: any) {
       let err: AxiosError<LoginErrorResponse> = error;
@@ -49,13 +50,13 @@ export const authSlice = createSlice({
       state.email = "ploy@gmail.com Example";
     },
   },
-// global state ใช้ได้ทุกที่
+  // global state ใช้ได้ทุกที่
 
   // extraReducers: (builder) => {
   //   builder.addCase(
   //     loginThunk.fulfilled,
   //     (state, action: PayloadAction<LoginResponse | null>) => {
-  //       state.loginResponse = action.payload;
+  //       state.loginResponse = action.payload; //กรณีต้องใช้งาน Global state ถ้าใช้ unwrap เอาออกได้
   //     }
   //   );
   // },
