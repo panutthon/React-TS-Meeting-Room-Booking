@@ -21,9 +21,6 @@ export async function getProfile(): Promise<AxiosResponse<ProfileResponse> | nul
         return null;
     }
     return await http.get<ProfileResponse>('https://api.codingthailand.com/api/profile',{
-        headers: {
-            Authorization: 'Bearer ' + token.access_token
-            // Authorization: `Bearer ${token.access_token}`
-        }
+        headers: { Authorization: 'Bearer ' + token.access_token}
     });
 }

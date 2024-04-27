@@ -54,7 +54,7 @@ export default function LoginPage() {
       const result = await dispatch(loginThunk(data)).unwrap(); // global state
       // console.log(result.access_token);
       if (result.access_token) {
-        localStorage.setItem("token", JSON.stringify(result.access_token));
+        // localStorage.setItem("token", JSON.stringify(result.access_token));
         navigate("/dashboard");
       }
       toast({
