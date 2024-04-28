@@ -87,16 +87,16 @@ export default function LoginPage() {
       >
         <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
           <Stack align={"center"}>
-            <Heading fontSize={"4xl"}>Sign in to your account</Heading>
+            <Heading fontSize={"4xl"}>Log In to your account</Heading>
             <Text fontSize={"lg"} color={"gray.600"}>
-              Panutthon{" "}
+              New to Neptune?{" "}
               <Link
                 color={"blue.400"}
                 onClick={() => {
-                  window.open("https://www.youtube.com/watch?v=JBAuRoIRAs8");
+                  navigate("/signup");
                 }}
               >
-                features
+                Sign up
               </Link>
             </Text>
           </Stack>

@@ -23,3 +23,6 @@ export interface ProfileErrorResponse {
     message:     string;
     status_code: number;
 }
+
+
+// Path: src/app-types/profile-update.type.ts
