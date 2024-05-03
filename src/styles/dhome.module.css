@@ -1,0 +1,9 @@
+.test {
+    color: var(--error-color);
+    font-weight: bold;
+}
+
+.titleStyles {
+    border-left: solid var(--primary-color);
+    border-width: 0 8px;
+}

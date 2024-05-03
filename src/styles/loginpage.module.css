@@ -1,0 +1,11 @@
+.centericon {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    width: 175px;
+}
+
+.headlogin {
+    font-size: 30px;
+    font-weight: 700;
+}

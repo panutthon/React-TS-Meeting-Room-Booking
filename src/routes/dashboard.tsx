@@ -3,6 +3,7 @@ import DLayout from "../pages/dashboard/d-layout";
 import DHome from "../pages/dashboard/d-home";
 import DRoom from "../pages/dashboard/d-room";
 
+
 const routeDashboard: RouteObject[] = [
   {
     path: "/dashboard",

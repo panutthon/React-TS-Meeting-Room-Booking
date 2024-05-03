@@ -1,0 +1,35 @@
+.centericon {
+    border-radius: 15px;
+    width: 630px;
+    height: 413px;
+    /* w={630} h={413} */
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        width: 100%;
+        height: auto;
+    }
+}
+
+.textstyle {
+    font-size: 38px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        font-size: 24px;
+    }
+}
+
+.buttonstyle {
+    width: 160px;
+    margin-top: 30px;
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        width: 120px;
+        margin-top: 20px;
+    }
+}

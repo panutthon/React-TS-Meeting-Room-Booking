@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap');
+
+* {
+    font-family: "Noto Sans Thai", sans-serif;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 :root {
     --primary-color: #F8D247;
     --secondary-color: #F8D247;
@@ -9,6 +17,9 @@
     --error-color: #E53E3E;
     --white-color: #fff;
     --footer-color: #141516;
+    --hoverbutton-color: #EABE00;
+    --greenflex-color: #1AA367;
+    --redflex-color: #E53E3E;
 }
 
 .mytitle {
@@ -26,5 +37,5 @@
 }
 
 .menuActive {
-    background-color: var(--primary-color);
+    background-color: var(--hoverbutton-color);
 }

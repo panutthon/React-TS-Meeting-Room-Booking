@@ -1,0 +1,16 @@
+.title {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+}
+
+.navbarbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--white-color);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 21px 20px;
+  height: 10vh;
+}
